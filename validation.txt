@@ -75,7 +75,7 @@ Regular expression for characters and numbers only validation with spaces -
    	This validation can be useful in validating address field
 
 -------------------------------------------------------------------------------------------------------
-4. Password validation with 5 to 14 characters allowed 
+4. Password validation with 6 to 15 characters allowed 
 -------------------------------------------------------------------------------------------------------
 Regular expression for characters and numbers only validation with spaces - 
 	
