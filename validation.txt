@@ -1,0 +1,131 @@
+Test cases 
+---------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------
+1. Email : 
+--------------------------------------------------------------------------------------------
+I. Regular expression for email validation (/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/) : 
+
+	var emailOnly = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	if(email != '' || email != null || email.length != 0)
+	{
+	   	if(!email.match(emailOnly))
+	   	{
+	   		flag = 1;
+			$('#edit_profile_email_error').text("Invalid email ID");
+		  	}
+	}
+
+	Problem :
+		This will allow email 'cssvaibhav@gmail.com' but will not allow email for 'CSSVAIBHAV@gmail.COM'
+	Solution :
+		Hence before processing or matching with regular expression, convert current email to lowercase so that the error will not occur.
+
+		Note : Also on server side validation do same i.e. convert current email to lowercase and then apply server side validation.
+		e.g. In laravel you can apply validation rule for regular expression as - 
+		$rules['emailHID']  = 'required|regex:/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/';
+
+	Note : This regular expression will allow email such as xyz.co@gmail.co.in, xyz.co@gmail.com etc. but will not allow email such as xyz..@gmail.com, xyz@co..com etc.
+
+-------------------------------------------------------------------------------------------------------
+2. Characters and space only validation :
+-------------------------------------------------------------------------------------------------------
+Regular expression for characters and space only validation - 
+	
+	var charactersOnly = /^[a-zA-Z ]+$/;
+	
+	if(firstName == '' || firstName == null || firstName.length == 0)
+	{}
+	else
+	{
+		console.log('First Name = '+firstName.match(charactersOnly));
+		if(!firstName.match(charactersOnly))
+		{
+			flag = 1;
+			$('#first_name_error').text("Only characters allowed");
+		}
+		else
+			console.log('first name pass');
+ 	}
+
+ 	Note : This validation will allow small as well as capital characters with spaces
+
+ 	This validation can be useful in validating name field
+
+-------------------------------------------------------------------------------------------------------
+3. Characters and numbers only validation :
+-------------------------------------------------------------------------------------------------------
+Regular expression for characters and numbers only validation with spaces - 
+	
+	var charNumsOnly   = /^[0-9a-zA-Z ]+$/;
+	
+	if(address1 =='' || address1 == null || address1.length == 0)
+	{}
+	else
+  	{
+  		if(!address1.match(charNumsOnly))
+   		{
+   			flag = 1;
+   			$('#address_line_1_error').text("Only characters and numbers allowed");
+   		}
+   	}
+
+   	Note : This validation will allow small as well as capital characters with spaces and numbers but not fractional numbers
+
+   	This validation can be useful in validating address field
+
+-------------------------------------------------------------------------------------------------------
+4. Password validation with 5 to 14 characters allowed 
+-------------------------------------------------------------------------------------------------------
+Regular expression for characters and numbers only validation with spaces - 
+	
+	var digits   = /^\w{5,14}$/;
+	
+	if(password =='' || password == null)
+	{
+		$('#new_password_first_login_error').text("Please enter new password");
+		flag =0;
+	}
+	else if(!password.match(digits))
+	{
+		$('#new_password_first_login_error').text("Password should be at least 6 characters long.");
+		flag =0;	
+	}
+
+   	Note : This validation will allow all characters but should range between 6 to 15 character. Here we have given 5-14 because index starts from 0th position 
+
+   	This validation can be useful in validating password field
+
+-------------------------------------------------------------------------------------------------------
+4. Phone number validation with 10 digit numbers only
+------------------------------------------------------------------------------------------------------
+Regular expression for characters and numbers only validation with spaces - 
+	
+	var phoneno = /^\d{10}$/;;
+	
+	 if(!newMobileNumber.match(phoneno))
+	 {
+ 		$('#new_mobile_error').text("Mobile number should be 10 digits");
+   		flag = 0;
+   	}
+
+   	Note : This validation will allow only digits but of 10 digits.
+
+   	This validation can be useful in validating phone number field
+
+-------------------------------------------------------------------------------------------------------
+5. Number only validation 
+------------------------------------------------------------------------------------------------------
+Regular expression for validating number only field of unlimited digits
+	
+	var numbers = /^\d+$/;
+	
+	if(!newMobileNumber.match(numbers))
+	{
+ 		$('#new_mobile_error').text("Characters are not accepted");
+   		flag = 0;	
+   	}
+
+   	Note : This validation will allow only digits of unlimited characters.
+
+   	This validation can be useful in validating phone number field i.e. all entered input value is of number type and then you can apply phone number validation as mentioned above
