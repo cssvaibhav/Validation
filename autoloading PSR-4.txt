@@ -1,0 +1,40 @@
+
+Autoloading in PSR-4 and using Composer : 
+-------------------------------------------------------------------------------------------------
+1. Suppose you have direcotry structure as follows-
+   <root>
+   |- composer.json
+   |- index.php
+   |- src
+   	  |- logger
+   	  	 |- Logger.php
+   	  |- email
+   	  	 |- Email.php
+
+2. In index.php file, you need inlcude statement as -
+	require __DIR__.'/vendor/autoload.php';
+
+3. In same page you can create object of Logger class i.e. Logger.php / Email Class i.e. Email.php as follows-
+	$obj = new logger\Logger.php Or
+	$obj = new email\Email.php
+
+   And use their method to show output
+
+   $obj->info();
+
+4. Now create composer.json file if it is not there, or edit it as follows.
+	{
+	    "autoload": {
+	        "psr-4": {"": "src/"}
+	    }
+	}
+
+	Here we are telling composer to autoload the files with PSR-4 standards.
+	And we are telling composer that our package files are stored in src folders as written in composer.json file.
+
+5. Now open terminal and goto your projects root folder and type following command
+
+	<project>$ composer dump_autoload
+
+   This command will create autoload.php file in vendor folder which will be responsible for autoloading particular class whenever we directly use the class without including them.
+   e.g. as shown in index.php we are not including logger\Logger.php or email\Email.php file. We are directly using it. So, the first line which we have written in index.php i.e. "require __DIR__.'/vendor/autoload.php';" will be responsible for loading appropriate file whenever we require it.
